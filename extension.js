@@ -46,7 +46,7 @@ function activate(context) {
 
 			const composerJson = JSON.parse(composerJsonContent);
 
-			if (!composerJson.extra || !composerJson.extra['flarum-extension']) {
+			if (!composerJson.type || composerJson.type !== 'flarum-extension') {
 				return;
 			}
 
