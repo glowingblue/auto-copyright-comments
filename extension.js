@@ -50,8 +50,11 @@ function activate(context) {
 				return;
 			}
 
-			// Save the package name for later
 			packageName = composerJson.name;
+			// Check that the name of the package is like glowingblue/{package-name}
+			if (!packageName.startsWith('glowingblue/')) {
+				return;
+			}
 		}
 
 		let pathOk = false;
