@@ -13,6 +13,7 @@ const template = `/*
 
 const pathsWhitelist = [
 	'/src',
+	'/tests',
 	'/js/src/forum',
 	'/js/src/admin',
 	'/js/src/common',

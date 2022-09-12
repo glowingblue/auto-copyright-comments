@@ -31,7 +31,7 @@ Currently the template is hardcoded (it might become a setting in the future):
 And also the whitelisted paths are hardcoded:
 
 ```json
-["/src", "/js/src/forum", "/js/src/admin", "/js/src/common", "/migrations", "/extend.php"]
+["/src", "/tests", "/js/src/forum", "/js/src/admin", "/js/src/common", "/migrations", "/extend.php"]
 ```
 
 ## Future improvements
