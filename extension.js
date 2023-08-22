@@ -141,7 +141,7 @@ function activate(context) {
 		const newCopyrightComment = template
 			.replace('{package-name}', packageName)
 			.replace('{year}', new Date().getFullYear().toString())
-			.replace('{authors}', authors.join(', '));
+			.replace('{authors}', authors.sort().join(', '));
 
 		// Check if the text has changed
 		if (copyrightComment && newCopyrightComment !== copyrightComment) {
