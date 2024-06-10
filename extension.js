@@ -4,8 +4,7 @@ const { execSync } = require('child_process');
 const template = `/*
  * This file is part of {package-name}.
  *
- * Copyright (c) {year} Glowing Blue AG.
- * Authors: {authors}.
+ * Copyright (c) Glowing Blue AG.
  *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
@@ -106,42 +105,8 @@ function activate(context) {
 			text.match(new RegExp('/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/')) || ['']
 		).pop();
 
-		// Get the authors of the commits of this file
-		// To do that:
-		// Get the directory of the fileName
-		const directory = filePath.substring(0, filePath.lastIndexOf('/'));
-		// Get the file name
-		const fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
-		// Then run the `git log` command (as a child process)
-		// Usually someone would use `git shortlog` to do that, but it doesn't work in this context as there
-		// there is no tty. So we use the `git log` command instead.
-		// Idea found here https://stackoverflow.com/questions/24807930/git-list-all-authors-of-a-folder-of-files/24808289
-		const cmd = `git log --pretty=format:"%an" ${fileName} | sort | uniq -c | sort -t ' ' -k 1 -r`;
-		const cmdOutput = execSync(cmd, { cwd: directory });
-		// Parse the output of the command
-		const authorMatches = cmdOutput.toString().matchAll(/\d+\s(.*)/g);
-		// Get the authors
-		const authors = [...authorMatches].map((m) => m[1] || '').filter((a) => a);
-
-		// It might be that this file is new and has no commits yet or that the current author is doing his first commit.
-		// In that case we need to get the name of the author from the gut config.
-		const gitUserName = execSync('git config --get user.name', {
-			encoding: 'utf8',
-			cwd: directory,
-		})
-			.toString()
-			// Remove line breaks or whitespace at the end or beginning of the string
-			.trim();
-		// If the git user name is not in the list of authors, add it.
-		if (gitUserName && authors.indexOf(gitUserName) === -1) {
-			authors.push(gitUserName);
-		}
-
 		// Create a new copyright comment from this template
-		const newCopyrightComment = template
-			.replace('{package-name}', packageName)
-			.replace('{year}', new Date().getFullYear().toString())
-			.replace('{authors}', authors.sort().join(', '));
+		const newCopyrightComment = template.replace('{package-name}', packageName);
 
 		// Check if the text has changed
 		if (copyrightComment && newCopyrightComment !== copyrightComment) {
