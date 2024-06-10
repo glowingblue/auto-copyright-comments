@@ -6,7 +6,7 @@
     "url": "https://github.com/glowingblue/auto-copyright-comments"
   },
   "description": "Generates or updates copyright comments automatically for Flarum extensions source code",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "license": "MIT",
   "author": "dev@glowingblue.com",
   "publisher": "glowingblue",
