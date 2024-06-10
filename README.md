@@ -20,8 +20,7 @@ Currently the template is hardcoded (it might become a setting in the future):
 /*
  * This file is part of {package-name}.
  *
- * Copyright (c) {year} Glowing Blue AG.
- * Authors: {authors}.
+ * Copyright (c) Glowing Blue AG.
  *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
